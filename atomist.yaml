@@ -15,7 +15,7 @@
 #
 
 skill:
-  name: atomist/npm-license-skill
+  name: atomist/npm-license-usage-skill
   title: NPM License Usage
   version: 0.1.0
   author: Atomist
