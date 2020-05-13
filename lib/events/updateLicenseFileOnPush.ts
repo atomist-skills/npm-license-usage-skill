@@ -19,6 +19,7 @@ import { gitHubComRepository } from "@atomist/skill/lib/project";
 import * as git from "@atomist/skill/lib/project/git";
 import { gitHub } from "@atomist/skill/lib/project/github";
 import { gitHubAppToken } from "@atomist/skill/lib/secrets";
+import * as fs from "fs-extra";
 import { Configuration } from "../configuration";
 import { addThirdPartyLicenseFile } from "../thirdPartyLicense";
 import { UpdateLicenseFileOnPushSubscription } from "../typings/types";
@@ -55,6 +56,14 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configur
         branch: push.branch,
         credential,
     }));
+
+    if (!(await fs.pathExists(project.path("package.json")))) {
+        return {
+            code: 0,
+            visibility: "hidden",
+            reason: "Ignoring push to non NPM repository",
+        };
+    }
 
     await addThirdPartyLicenseFile(project, ctx);
 
