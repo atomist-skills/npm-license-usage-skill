@@ -43,7 +43,8 @@ export async function addThirdPartyLicenseFile(project: Project,
                                                ctx: EventContext<UpdateLicenseFileOnPushSubscription, Configuration>): Promise<void> {
     const cfg = ctx.configuration[0].parameters;
     const pj = await fs.readJson(project.path("package.json"));
-    const ownModule = `${pj.name || `@${project.id.owner}/${project.id.repo}`}@${pj.version || "0.1.0"}`;
+    const projectName = pj.name || `@${project.id.owner === "atomist-skills" ? "atomist" : project.id.owner}/${project.id.repo}`;
+    const ownModule = `${projectName}@${pj.version || "0.1.0"}`;
 
     if (!(await fs.pathExists(project.path("node_modules")))) {
         if (await fs.pathExists(project.path("package-lock.json"))) {
@@ -135,7 +136,6 @@ ${LicenseTableHeader}
 ${deps.join("\n")}`);
     });
 
-    const projectName = pj.name || `@${project.id.owner}/${project.id.repo}`;
     const lic = spdx[pj.license] ? `
 
 \`${projectName}\` is licensed under ${spdx[pj.license].name} - [${spdx[pj.license].url}](${spdx[pj.license].url}).` : "";
