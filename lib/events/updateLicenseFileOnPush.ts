@@ -113,5 +113,4 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configur
         visibility: "hidden",
         reason: `No change to NPM license usage file in [${repo.owner}/${repo.name}](${repo.url})`,
     };
-
 };
