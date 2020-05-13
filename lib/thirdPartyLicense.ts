@@ -158,7 +158,8 @@ Please send any questions or inquires to [${cfg.contact}](mailto:${cfg.contact})
 ---
 
 ${cfg.footer || ""}
-`;
+
+<!---${ctx.skill.namespace}/${ctx.skill.name}@${ctx.skill.version}--->`;
 
     await addGitattribute(project, cfg.file);
     await fs.remove(project.path("node_modules"));
