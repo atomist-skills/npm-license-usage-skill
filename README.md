@@ -1,4 +1,4 @@
-# `atomist/npm-license-skill`
+# `atomist/npm-license-usage-skill`
 
 Atomist Skill to maintain a third-party OSS license usage file.
  
