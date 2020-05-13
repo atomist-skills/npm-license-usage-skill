@@ -13,10 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export interface Configuration {
-    contact: string;
-    file?: string;
-    footer?: string;
-    push: "commit_default" | "commit" | "pr_default" | "pr";
-}

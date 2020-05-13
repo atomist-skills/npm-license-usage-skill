@@ -71,7 +71,7 @@ parameters:
   - single_choice:
       name: push
       display_name: Update license information
-      description: Control how and when license information should be pushed into the repository
+      description: Control how and when license usage information should be pushed into the repository
       options:
         - text: Commit to default branch only
           value: commit_default
@@ -87,9 +87,3 @@ parameters:
       display_name: Which repositories
       description: ''
       required: false
-
-artifacts:
-
-commands:
-
-subscriptions:
