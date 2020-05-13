@@ -37,6 +37,12 @@ skill:
       sourceMaps: false
       minify: true
 
+  runtime:
+    memory: 2048
+    timeout: 540
+    name: nodejs10
+    entry_point: entryPoint
+
 resource_providers:
   - name: github
     description: GitHub
