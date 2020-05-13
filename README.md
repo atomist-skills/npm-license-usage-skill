@@ -1,6 +1,6 @@
 # `atomist/npm-license-skill`
 
-Atomist Skill to maintain a third-party OSS license file.
+Atomist Skill to maintain a third-party OSS license usage file.
  
 <!---atomist-skill-readme:start--->
 
