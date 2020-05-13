@@ -1,0 +1,8 @@
+.gitignore
+.atomistignore
+.eslint*
+codegen.yaml
+*.md
+tsconfig.json
+
+/test/**

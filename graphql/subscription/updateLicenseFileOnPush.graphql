@@ -1,0 +1,31 @@
+subscription updateLicenseFileOnPush {
+    Push {
+        repo {
+            defaultBranch
+            url
+            owner
+            name
+            org {
+                provider {
+                    apiUrl
+                    gitUrl
+                }
+            }
+            channels {
+                name
+                team {
+                    id
+                }
+            }
+        }
+        branch
+        after {
+            timestamp
+            sha
+            url
+            author {
+                login
+            }
+        }
+    }
+}
