@@ -19,6 +19,7 @@ import { Project } from "@atomist/skill/lib/project/project";
 import * as fs from "fs-extra";
 import * as lc from "license-checker";
 import * as _ from "lodash";
+import * as path from "path";
 import * as spdx from "spdx-license-list";
 import { promisify } from "util";
 import { Configuration } from "./configuration";
@@ -160,7 +161,9 @@ ${cfg.footer || ""}
 
     await addGitattribute(project, cfg.file);
     await fs.remove(project.path("node_modules"));
-    await fs.writeFile(project.path(cfg.file || LicenseFileName), content);
+    const file = project.path(cfg.file || LicenseFileName);
+    await fs.ensureDir(path.dirname(file));
+    await fs.writeFile(file, content);
 }
 
 async function addGitattribute(p: Project,
