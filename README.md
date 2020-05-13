@@ -13,10 +13,8 @@ With this skill you can automatically maintain a third-party OSS license file fo
 Connect and configure this integration:
 
 * **GitHub**
-* **Slack**
 
 The **GitHub** integration must be configured in order to use this skill. At least one repository must be selected.
-We recommand that you configure the **Slack** integration. 
 
 # How to configure
 
