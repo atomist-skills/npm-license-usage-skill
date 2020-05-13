@@ -1,6 +1,6 @@
-# `@atomist-skills/npm-license-usage-skill`
+# `@atomist/npm-license-usage-skill`
 
-This page details all runtime OSS dependencies of `@atomist-skills/npm-license-usage-skill`.
+This page details all runtime OSS dependencies of `@atomist/npm-license-usage-skill`.
 
 ## Licenses
 
