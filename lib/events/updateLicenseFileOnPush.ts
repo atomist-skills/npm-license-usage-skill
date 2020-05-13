@@ -68,7 +68,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configur
     await addThirdPartyLicenseFile(project, ctx);
 
     if (!(await git.status(project)).isClean) {
-        const commitMsg = `Update NPM license usage\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
+        const commitMsg = `Update NPM license usage for ${push.after.sha.slice(0, 7)}\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
         if (cfg.push.includes("commit")) {
             await git.commit(project, commitMsg);
             await git.push(project);
