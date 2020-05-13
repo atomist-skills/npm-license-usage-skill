@@ -135,12 +135,13 @@ ${LicenseTableHeader}
 ${deps.join("\n")}`);
     });
 
+    const projectName = pj.name || `@${project.id.owner}/${project.id.repo}`;
     const lic = spdx[pj.license] ? `
 
-\`${pj.name || `@${project.id.owner}/${project.id.repo}`}\` is licensed under ${spdx[pj.license].name} - [${spdx[pj.license].url}](${spdx[pj.license].url}).` : "";
-    const content = `# \`${pj.name}\`${lic}
+\`${projectName}\` is licensed under ${spdx[pj.license].name} - [${spdx[pj.license].url}](${spdx[pj.license].url}).` : "";
+    const content = `# \`${projectName}\`${lic}
 
-This page details all runtime OSS dependencies of \`${pj.name}\`.
+This page details all runtime OSS dependencies of \`${projectName}\`.
 
 ## Licenses
 
