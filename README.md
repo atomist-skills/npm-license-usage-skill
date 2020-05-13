@@ -6,7 +6,7 @@ Atomist Skill to maintain a third-party OSS license usage file.
 
 # What it's useful for
 
-With this skill you can automatically maintain a third-party OSS license file for your NPM-based project. 
+With this skill you can automatically maintain a third-party OSS license usage file for your NPM-based project. 
 
 # Before you get started
 
