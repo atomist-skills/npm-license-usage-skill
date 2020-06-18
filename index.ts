@@ -89,7 +89,5 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
         repos: repoFilter({ required: false }),
     },
 
-    subscriptions: [
-        "file://graphql/subscription/*.graphql"
-    ],
+    subscriptions: ["file://graphql/subscription/*.graphql"],
 });
