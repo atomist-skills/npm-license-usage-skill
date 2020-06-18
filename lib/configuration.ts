@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-export interface Configuration {
+export interface NpmLicenseUsageConfiguration {
     contact: string;
     file?: string;
     footer?: string;
-    push: "commit_default" | "commit" | "pr_default" | "pr";
+    push?: "commit_default" | "commit" | "pr" | "pr_default" | "pr_default_commit";
+    labels?: string[];
 }

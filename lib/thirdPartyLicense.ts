@@ -22,7 +22,7 @@ import * as _ from "lodash";
 import * as path from "path";
 import * as spdx from "spdx-license-list";
 import { promisify } from "util";
-import { Configuration } from "./configuration";
+import { NpmLicenseUsageConfiguration } from "./configuration";
 import { UpdateLicenseFileOnPushSubscription } from "./typings/types";
 
 const LicenseMapping = {
@@ -38,12 +38,14 @@ const LicenseTableHeader = `| Name | Version | Publisher | Repository |
 const SummaryTableHadler = `| License | Count |
 |---------|-------|`;
 
-
-export async function addThirdPartyLicenseFile(project: Project,
-                                               ctx: EventContext<UpdateLicenseFileOnPushSubscription, Configuration>): Promise<void> {
+export async function addThirdPartyLicenseFile(
+    project: Project,
+    ctx: EventContext<UpdateLicenseFileOnPushSubscription, NpmLicenseUsageConfiguration>,
+): Promise<void> {
     const cfg = ctx.configuration[0].parameters;
     const pj = await fs.readJson(project.path("package.json"));
-    const projectName = pj.name || `@${project.id.owner === "atomist-skills" ? "atomist" : project.id.owner}/${project.id.repo}`;
+    const projectName =
+        pj.name || `@${project.id.owner === "atomist-skills" ? "atomist" : project.id.owner}/${project.id.repo}`;
     const ownModule = `${projectName}@${pj.version || "0.1.0"}`;
 
     if (!(await fs.pathExists(project.path("node_modules")))) {
@@ -54,11 +56,10 @@ export async function addThirdPartyLicenseFile(project: Project,
         }
     }
 
-    const json = await
-        promisify(lc.init)({
-            start: project.path(),
-            production: true,
-        });
+    const json = await promisify(lc.init)({
+        start: project.path(),
+        production: true,
+    });
 
     const grouped = {};
     _.forEach(json, (v, k) => {
@@ -87,15 +88,20 @@ export async function addThirdPartyLicenseFile(project: Project,
             }
 
             if (grouped[license]) {
-                grouped[license] = [...grouped[license], {
-                    ...v,
-                    name: k,
-                }];
+                grouped[license] = [
+                    ...grouped[license],
+                    {
+                        ...v,
+                        name: k,
+                    },
+                ];
             } else {
-                grouped[license] = [{
-                    ...v,
-                    name: k,
-                }];
+                grouped[license] = [
+                    {
+                        ...v,
+                        name: k,
+                    },
+                ];
             }
         });
     });
@@ -104,7 +110,8 @@ export async function addThirdPartyLicenseFile(project: Project,
     const counts = _.mapValues(grouped, l => (l as any).length);
     for (const l in counts) {
         if (counts[l]) {
-            const anchor = l.toLocaleLowerCase()
+            const anchor = l
+                .toLocaleLowerCase()
                 .replace(/ /g, "-")
                 .replace(/\./g, "")
                 .replace(/:/g, "")
@@ -121,7 +128,8 @@ export async function addThirdPartyLicenseFile(project: Project,
             const name = dep.name.slice(0, ix);
             const version = dep.name.slice(ix + 1);
             return `|\`${name}\`|\`${version}\`|${dep.publisher ? dep.publisher : ""}|${
-                dep.repository ? `[${dep.repository}](${dep.repository})` : ""}|`;
+                dep.repository ? `[${dep.repository}](${dep.repository})` : ""
+            }|`;
         });
         let ld = "";
 
@@ -136,9 +144,11 @@ ${LicenseTableHeader}
 ${deps.join("\n")}`);
     });
 
-    const lic = spdx[pj.license] ? `
+    const lic = spdx[pj.license]
+        ? `
 
-\`${projectName}\` is licensed under ${spdx[pj.license].name} - [${spdx[pj.license].url}](${spdx[pj.license].url}).` : "";
+\`${projectName}\` is licensed under ${spdx[pj.license].name} - [${spdx[pj.license].url}](${spdx[pj.license].url}).`
+        : "";
     const content = `# \`${projectName}\`${lic}
 
 This page details all runtime OSS dependencies of \`${projectName}\`.
@@ -166,8 +176,7 @@ ${cfg.footer || ""}`;
     await fs.writeFile(file, content);
 }
 
-async function addGitattribute(p: Project,
-                               file: string): Promise<void> {
+async function addGitattribute(p: Project, file: string): Promise<void> {
     const attribute = `${file || LicenseFileName} linguist-generated=true
 `;
     if (await fs.pathExists(p.path(GitattributesFileName))) {

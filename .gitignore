@@ -17,3 +17,4 @@ node_modules/
 /doc/
 /log/
 /lib/typings/types.ts
+/.atomist/

@@ -17,14 +17,14 @@
 import { EventHandler } from "@atomist/skill/lib/handler";
 import { gitHubComRepository } from "@atomist/skill/lib/project";
 import * as git from "@atomist/skill/lib/project/git";
-import { gitHub } from "@atomist/skill/lib/project/github";
+import { formatMarkers, gitHub } from "@atomist/skill/lib/project/github";
 import { gitHubAppToken } from "@atomist/skill/lib/secrets";
 import * as fs from "fs-extra";
-import { Configuration } from "../configuration";
+import { NpmLicenseUsageConfiguration } from "../configuration";
 import { addThirdPartyLicenseFile } from "../thirdPartyLicense";
 import { UpdateLicenseFileOnPushSubscription } from "../typings/types";
 
-export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configuration> = async ctx => {
+export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicenseUsageConfiguration> = async ctx => {
     const push = ctx.data.Push[0];
     const repo = push.repo;
     const cfg = ctx.configuration[0].parameters;
@@ -47,17 +47,21 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configur
 
     await ctx.audit.log(`Starting NPM license usage update on ${repo.owner}/${repo.name}`);
 
-    const credential = await ctx.credential.resolve(gitHubAppToken({
-        owner: repo.owner,
-        repo: repo.name,
-        apiUrl: repo.org.provider.apiUrl,
-    }));
-    const project = await ctx.project.clone(gitHubComRepository({
-        owner: repo.owner,
-        repo: repo.name,
-        branch: push.branch,
-        credential,
-    }));
+    const credential = await ctx.credential.resolve(
+        gitHubAppToken({
+            owner: repo.owner,
+            repo: repo.name,
+            apiUrl: repo.org.provider.apiUrl,
+        }),
+    );
+    const project = await ctx.project.clone(
+        gitHubComRepository({
+            owner: repo.owner,
+            repo: repo.name,
+            branch: push.branch,
+            credential,
+        }),
+    );
 
     await ctx.audit.log(`Cloned repository ${repo.owner}/${repo.name} at sha ${push.after.sha.slice(0, 7)}`);
 
@@ -73,30 +77,84 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, Configur
 
     if (!(await git.status(project)).isClean) {
         await ctx.audit.log(`Updated NPM license usage`);
-        const commitMsg = `Update NPM license usage for ${push.after.sha.slice(0, 7)}\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
-        if (cfg.push.includes("commit")) {
-            await git.commit(project, commitMsg);
+        const commitMsg = `NPM license usage update for ${push.after.sha.slice(
+            0,
+            7,
+        )}\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
+        const isDefaultBranch = push.branch === push.repo.defaultBranch;
+        const options = {
+            name: push.after.author?.name,
+            email: push.after.author?.emails?.[0]?.address,
+        };
+        if (
+            cfg.push === "commit" ||
+            (isDefaultBranch && cfg.push === "commit_default") ||
+            (!isDefaultBranch && cfg.push === "pr_default_commit")
+        ) {
+            await git.commit(project, commitMsg, options);
             await git.push(project);
-        } else if (cfg.push.includes("pr")) {
-            const branchName = `npm-license-${push.branch}`;
-            await git.createBranch(project, branchName);
-            await git.commit(project, commitMsg);
-            await project.exec("git", ["push", "origin", branchName, "--force"]);
+        } else if (cfg.push === "pr" || (isDefaultBranch && cfg.push === "pr_default_commit")) {
+            const branch = `npm-license-${push.branch}`;
+            const changedFiles = (await project.exec("git", ["diff", "--name-only"])).stdout
+                .split("\n")
+                .map(f => f.trim())
+                .filter(f => !!f && f.length > 0)
+                .slice(0, -1);
+            const body = `Updated NPM license usage file:
+
+${changedFiles.map(f => ` * \`${f}\``).join("\n")}
+${formatMarkers(ctx)}
+`;
+
+            await git.createBranch(project, branch);
+            await git.commit(project, commitMsg, options);
+            await git.push(project, { force: true, branch });
 
             try {
                 const api = gitHub(gitHubComRepository({ owner: repo.owner, repo: repo.name, credential }));
-                const pr = (await api.pulls.create({
-                    owner: repo.owner,
-                    repo: repo.name,
-                    title: "NPM License Usage",
-                    body: commitMsg,
-                    base: push.branch,
-                    head: branchName,
-                })).data;
+                let pr;
+                const openPrs = (
+                    await api.pulls.list({
+                        owner: repo.owner,
+                        repo: repo.name,
+                        state: "open",
+                        base: push.branch,
+                        head: `${repo.owner}:${branch}`,
+                        per_page: 100,
+                    })
+                ).data;
+                if (openPrs.length === 1) {
+                    pr = openPrs[0];
+                    await api.pulls.update({
+                        owner: repo.owner,
+                        repo: repo.name,
+                        pull_number: pr.number,
+                        body,
+                    });
+                } else {
+                    pr = (
+                        await api.pulls.create({
+                            owner: repo.owner,
+                            repo: repo.name,
+                            title: "NPM license usage update",
+                            body,
+                            base: push.branch,
+                            head: branch,
+                        })
+                    ).data;
+                    if (cfg.labels?.length > 0) {
+                        await api.issues.update({
+                            owner: repo.owner,
+                            repo: repo.name,
+                            issue_number: pr.number,
+                            labels: cfg.labels,
+                        });
+                    }
+                }
                 await api.pulls.createReviewRequest({
                     owner: repo.owner,
                     repo: repo.name,
-                    pull_number: pr.number, // eslint-disable-line @typescript-eslint/camelcase
+                    pull_number: pr.number,
                     reviewers: [push.after.author.login],
                 });
                 await ctx.audit.log(`Raised pull request [#${pr.number}](${pr.html_url})`);

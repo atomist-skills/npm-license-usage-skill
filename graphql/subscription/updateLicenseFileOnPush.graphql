@@ -25,6 +25,10 @@ subscription updateLicenseFileOnPush {
             url
             author {
                 login
+                name
+                emails {
+                    address
+                }
             }
         }
     }
