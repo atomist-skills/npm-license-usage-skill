@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 -   New packaging layout. [dbfdd9c](https://github.com/atomist-skills/npm-license-usage-skill/commit/dbfdd9cbc8b0c3680142627994a7c0c8d1690a5c)
+-   README content. [dfb28f3](https://github.com/atomist-skills/npm-license-usage-skill/commit/dfb28f350a46b0e81ba3e0917093a27da119aba4)
