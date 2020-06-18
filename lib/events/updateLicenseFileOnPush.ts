@@ -98,8 +98,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
             const changedFiles = (await project.exec("git", ["diff", "--name-only"])).stdout
                 .split("\n")
                 .map(f => f.trim())
-                .filter(f => !!f && f.length > 0)
-                .slice(0, -1);
+                .filter(f => !!f && f.length > 0);
             const body = `Updated NPM license usage file:
 
 ${changedFiles.map(f => ` * \`${f}\``).join("\n")}
