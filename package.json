@@ -1,24 +1,7 @@
 {
-  "name": "@atomist/npm-license-usage-skill",
-  "description": "NPM License Usage",
-  "author": {
-    "name": "Atomist",
-    "email": "oss@atomist.com"
-  },
-  "keywords": [
-    "DEPENDENCIES",
-    "CODE_REVIEW"
-  ],
-  "license": "Apache-2.0",
-  "homepage": "https://github.com/atomist-seeds/npm-license-usage-skill",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atomist-seeds/npm-license-usage-skill.git"
-  },
-  "icon": "file://docs/images/icon.svg",
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "0.1.0-master.20200618080716",
+    "@atomist/skill": "0.1.0-master.20200623075110",
     "license-checker": "^25.0.1",
     "spdx-license-list": "^6.2.0"
   },

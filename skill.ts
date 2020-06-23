@@ -14,19 +14,28 @@
  * limitations under the License.
  */
 
-import { gitHubResourceProvider, slackResourceProvider } from "@atomist/skill/lib/resource_providers";
-import { LineStyle, ParameterType, repoFilter, skill } from "@atomist/skill/lib/skill";
+import { Category, LineStyle, parameter, ParameterType, resourceProvider, skill } from "@atomist/skill";
 import { NpmLicenseUsageConfiguration } from "./lib/configuration";
 
 export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
+    name: "npm-license-usage-skill",
+    namespace: "atomist",
+    displayName: "NPM License Usage",
+    author: "Atomist",
+    categories: [Category.Dependencies, Category.DevEx],
+    license: "Apache-2.0",
+    homepageUrl: "https://github.com/atomist-seeds/npm-license-usage-skill",
+    repositoryUrl: "https://github.com/atomist-seeds/npm-license-usage-skill.git",
+    iconUrl: "file://docs/images/icon.svg",
+
     runtime: {
         memory: 2048,
         timeout: 540,
     },
 
     resourceProviders: {
-        github: gitHubResourceProvider({ minRequired: 1 }),
-        slack: slackResourceProvider({ minRequired: 0 }),
+        github: resourceProvider.gitHub({ minRequired: 1 }),
+        slack: resourceProvider.chat({ minRequired: 0 }),
     },
 
     parameters: {
@@ -50,35 +59,11 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
             required: false,
             lineStyle: LineStyle.Multiple,
         },
-        push: {
-            type: ParameterType.SingleChoice,
+        push: parameter.pushStrategy({
             displayName: "Update license information",
             description: "Control how and when license usage information should be pushed into the repository",
-            defaultValue: "pr_default_commit",
-            options: [
-                {
-                    text: "Raise pull request for default branch; commit to other branches",
-                    value: "pr_default_commit",
-                },
-                {
-                    text: "Raise pull request for default branch only",
-                    value: "pr_default",
-                },
-                {
-                    text: "Raise pull request for any branch",
-                    value: "pr",
-                },
-                {
-                    text: "Commit to default branch only",
-                    value: "commit_default",
-                },
-                {
-                    text: "Commit to any branch",
-                    value: "commit",
-                },
-            ],
             required: false,
-        },
+        }),
         labels: {
             type: ParameterType.StringArray,
             displayName: "Pull request labels",
@@ -86,7 +71,7 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
                 "Add additional labels to pull requests raised by this skill, e.g. to configure the [auto-merge](https://go.atomist.com/catalog/skills/atomist/github-auto-merge-skill) behavior.",
             required: false,
         },
-        repos: repoFilter({ required: false }),
+        repos: parameter.repoFilter({ required: false }),
     },
 
     subscriptions: ["file://graphql/subscription/*.graphql"],
