@@ -1,6 +1,6 @@
 query Repositories {
-    Repo {
-        name
-        owner
-    }
+  Repo {
+    name
+    owner
+  }
 }
