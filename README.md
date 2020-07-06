@@ -79,7 +79,7 @@ integration is optional.
     Add additional labels to pull requests raised by this skill.
 
     This is useful to influence how and when the PR should be auto-merged by the
-    [Auto-merge Pull Requests](https://go.atomist.com/catalog/skills/atomist/github-auto-merge-skill)
+    [Auto-Merge Pull Requests](https://go.atomist.com/catalog/skills/atomist/github-auto-merge-skill)
     skill.
 
 1. **Determine repository scope**
