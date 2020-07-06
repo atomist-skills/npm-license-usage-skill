@@ -166,7 +166,7 @@ Please send any questions or inquires to [${cfg.contact}](mailto:${cfg.contact})
 ${cfg.footer ? `\n${cfg.footer.trim()}\n` : ""}`;
 
     await addGitattribute(project, cfg.file);
-    //await fs.remove(project.path("node_modules"));
+    await fs.remove(project.path("node_modules"));
     const file = project.path(cfg.file || LicenseFileName);
     await fs.ensureDir(path.dirname(file));
     await fs.writeFile(file, content);

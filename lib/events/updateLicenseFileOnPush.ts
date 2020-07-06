@@ -71,10 +71,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
 
     await addThirdPartyLicenseFile(project, ctx);
 
-    const commitMsg = `NPM license usage update for ${push.after.sha.slice(
-        0,
-        7,
-    )}\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
+    const commitMsg = `NPM license usage update\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
     const branch = `npm-license-${push.branch}`;
 
     return await github.persistChanges(
