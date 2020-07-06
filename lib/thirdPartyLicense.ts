@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import { EventContext } from "@atomist/skill/lib/handler";
-import { Project } from "@atomist/skill/lib/project/project";
+import { EventContext, project } from "@atomist/skill";
 import * as fs from "fs-extra";
 import * as lc from "license-checker";
 import * as _ from "lodash";
@@ -32,17 +31,15 @@ const LicenseMapping = {
 const LicenseFileName = "legal/THIRD_PARTY.md";
 const GitattributesFileName = ".gitattributes";
 
-const LicenseTableHeader = `| Name | Version | Publisher | Repository |
-|------|---------|-----------|------------|`;
+const LicenseTableHeader = ["Name", "Version", "Publisher", "Repository"];
 
-const SummaryTableHadler = `| License | Count |
-|---------|-------|`;
+const SummaryTableHadler = ["License", "Count"];
 
 export async function addThirdPartyLicenseFile(
-    project: Project,
+    project: project.Project,
     ctx: EventContext<UpdateLicenseFileOnPushSubscription, NpmLicenseUsageConfiguration>,
 ): Promise<void> {
-    const cfg = ctx.configuration[0].parameters;
+    const cfg = ctx.configuration?.[0]?.parameters;
     const pj = await fs.readJson(project.path("package.json"));
     const projectName =
         pj.name || `@${project.id.owner === "atomist-skills" ? "atomist" : project.id.owner}/${project.id.repo}`;
@@ -116,20 +113,22 @@ export async function addThirdPartyLicenseFile(
                 .replace(/\./g, "")
                 .replace(/:/g, "")
                 .replace(/\//g, "");
-            summary.push(`|[${l}](#${anchor})|${counts[l]}|`);
+            summary.push([`[${l}](#${anchor})`, counts[l]]);
         }
     }
 
     const details = [];
-    // tslint:disable-next-line:no-inferred-empty-object-type
     _.forEach(grouped, (v: any, k: any) => {
         const deps = v.map(dep => {
             const ix = dep.name.lastIndexOf("@");
             const name = dep.name.slice(0, ix);
             const version = dep.name.slice(ix + 1);
-            return `|\`${name}\`|\`${version}\`|${dep.publisher ? dep.publisher : ""}|${
-                dep.repository ? `[${dep.repository}](${dep.repository})` : ""
-            }|`;
+            return [
+                `\`${name}\``,
+                `\`${version}\``,
+                dep.publisher ? dep.publisher : "",
+                dep.repository ? `[${dep.repository}](${dep.repository})` : "",
+            ];
         });
         let ld = "";
 
@@ -139,9 +138,8 @@ export async function addThirdPartyLicenseFile(
 
         details.push(`
 #### ${k}
-${ld}
-${LicenseTableHeader}
-${deps.join("\n")}`);
+
+${ld ? `${ld}\n` : ""}${formatTable(LicenseTableHeader, deps)}`);
     });
 
     const lic = spdx[pj.license]
@@ -151,14 +149,13 @@ ${deps.join("\n")}`);
         : "";
     const content = `# \`${projectName}\`${lic}
 
-This page details all runtime OSS dependencies of \`${projectName}\`.
+This page details all runtime dependencies of \`${projectName}\`.
 
 ## Licenses
 
 ### Summary
 
-${SummaryTableHadler}
-${summary.sort((s1, s2) => s1.localeCompare(s2)).join("\n")}
+${formatTable(SummaryTableHadler, _.sortBy(summary, "[0]"))}
 ${details.sort((s1, s2) => s1.localeCompare(s2)).join("\n")}
 
 ## Contact
@@ -166,17 +163,16 @@ ${details.sort((s1, s2) => s1.localeCompare(s2)).join("\n")}
 Please send any questions or inquires to [${cfg.contact}](mailto:${cfg.contact}).
 
 ---
-
-${cfg.footer || ""}`;
+${cfg.footer ? `\n${cfg.footer.trim()}\n` : ""}`;
 
     await addGitattribute(project, cfg.file);
-    await fs.remove(project.path("node_modules"));
+    //await fs.remove(project.path("node_modules"));
     const file = project.path(cfg.file || LicenseFileName);
     await fs.ensureDir(path.dirname(file));
     await fs.writeFile(file, content);
 }
 
-async function addGitattribute(p: Project, file: string): Promise<void> {
+async function addGitattribute(p: project.Project, file: string): Promise<void> {
     const attribute = `${file || LicenseFileName} linguist-generated=true
 `;
     if (await fs.pathExists(p.path(GitattributesFileName))) {
@@ -189,4 +185,16 @@ ${attribute}`;
     } else {
         await fs.writeFile(p.path(GitattributesFileName), attribute);
     }
+}
+
+function formatTable(headers: string[], rows: string[][]): string {
+    const lines = [];
+    const widths = [];
+    headers.forEach((h, ix) => {
+        widths[ix] = _.maxBy([h, ...rows.map(r => r[ix])], "length").length;
+    });
+    lines.push(`|${headers.map((h, ix) => ` ${h.padEnd(widths[ix], " ")} `).join("|")}|`);
+    lines.push(`|${headers.map((h, ix) => ` ${"-".padEnd(widths[ix], "-")} `).join("|")}|`);
+    lines.push(...rows.map(r => `|${r.map((h, ix) => ` ${h.toString().padEnd(widths[ix], " ")} `).join("|")}|`));
+    return lines.join("\n");
 }
