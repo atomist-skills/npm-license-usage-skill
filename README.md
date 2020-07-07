@@ -2,7 +2,7 @@
 
 <!---atomist-skill-description:start--->
 
-Maintain a third-party license usage file  for NPM projects
+Maintain a third-party license usage file for NPM projects
 
 <!---atomist-skill-description:end--->
 
@@ -12,7 +12,7 @@ Maintain a third-party license usage file  for NPM projects
 
 # What it's useful for
 
-With this skill you can maintain a third-party open-source license usage file for 
+With this skill you can maintain a third-party open-source license usage file for
 your NPM-based project.
 
 -   Disclose your usage of third-party open-source software in your projects
