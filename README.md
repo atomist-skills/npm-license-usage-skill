@@ -2,7 +2,7 @@
 
 <!---atomist-skill-description:start--->
 
-Automatically maintain a third-party OSS license usage file
+Maintain a third-party license usage file  for NPM projects
 
 <!---atomist-skill-description:end--->
 
@@ -12,8 +12,8 @@ Automatically maintain a third-party OSS license usage file
 
 # What it's useful for
 
-With this skill you can automatically maintain a third-party open-source
-license usage file for your NPM-based project.
+With this skill you can maintain a third-party open-source license usage file for 
+your NPM-based project.
 
 -   Disclose your usage of third-party open-source software in your projects
     consistently across all your repositories
@@ -38,7 +38,7 @@ integration is optional.
     in case users want to raise questions.
 
     Please note that this email address will be committed into the file and
-    therefore might be publically readable.
+    therefore might be publicly readable.
 
 1. **Configure the name of the usage file**
 
