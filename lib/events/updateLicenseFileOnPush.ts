@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { EventHandler, github, repository, secret } from "@atomist/skill";
+import { EventHandler, github, repository, secret, status } from "@atomist/skill";
 import * as fs from "fs-extra";
 import { NpmLicenseUsageConfiguration } from "../configuration";
 import { addThirdPartyLicenseFile } from "../thirdPartyLicense";
@@ -33,12 +33,8 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
         };
     }
 
-    if (push.branch.startsWith("npm-license-")) {
-        return {
-            code: 0,
-            visibility: "hidden",
-            reason: "Ignoring push to npm-license branch",
-        };
+    if (push.branch.startsWith("atomist/")) {
+        return status.failure(`Ignore generated branch`).hidden();
     }
 
     await ctx.audit.log(`Starting NPM license usage update on ${repo.owner}/${repo.name}`);
@@ -72,7 +68,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
     await addThirdPartyLicenseFile(project, ctx);
 
     const commitMsg = `NPM license usage update\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
-    const branch = `npm-license-${push.branch}`;
+    const branch = `atomist/npm-license-${push.branch}`;
 
     return await github.persistChanges(
         ctx,
