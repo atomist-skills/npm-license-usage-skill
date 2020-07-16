@@ -13,7 +13,7 @@ Maintain a third-party license usage file for NPM projects
 # What it's useful for
 
 With this skill you can maintain a third-party open-source license usage file for
-your NPM-based project.
+your npm-based project.
 
 -   Disclose your usage of third-party open-source software in your projects
     consistently across all your repositories
@@ -90,7 +90,7 @@ integration is optional.
     To restrict the organizations or specific repositories on which the skill
     will run, you can explicitly choose organization(s) and repositories.
 
-# How to maintain NPM usage information
+# How to maintain npm usage information
 
 1. **Set up the skill by at least a contact email address**
 

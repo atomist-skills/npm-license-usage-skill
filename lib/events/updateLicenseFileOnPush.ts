@@ -37,7 +37,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
         return status.failure(`Ignore generated branch`).hidden();
     }
 
-    await ctx.audit.log(`Starting NPM license usage update on ${repo.owner}/${repo.name}`);
+    await ctx.audit.log(`Starting npm license usage update on ${repo.owner}/${repo.name}`);
 
     const credential = await ctx.credential.resolve(
         secret.gitHubAppToken({
@@ -61,13 +61,13 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
         return {
             code: 0,
             visibility: "hidden",
-            reason: "Ignoring push to non NPM repository",
+            reason: "Ignoring push to non npm repository",
         };
     }
 
     await addThirdPartyLicenseFile(project, ctx);
 
-    const commitMsg = `NPM license usage update\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
+    const commitMsg = `npm license usage update\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
     const branch = `atomist/npm-license-${push.branch}`;
 
     return await github.persistChanges(
@@ -83,7 +83,7 @@ export const handler: EventHandler<UpdateLicenseFileOnPushSubscription, NpmLicen
                 email: push.after.author?.emails?.[0]?.address,
             },
         },
-        { branch, body: "Updated NPM license usage file", title: "NPM license usage update", labels: cfg.labels },
+        { branch, body: "Updated npm license usage file", title: "npm license usage update", labels: cfg.labels },
         { message: commitMsg },
     );
 };

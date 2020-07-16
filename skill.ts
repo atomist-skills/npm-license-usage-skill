@@ -20,7 +20,7 @@ import { NpmLicenseUsageConfiguration } from "./lib/configuration";
 export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
     name: "npm-license-usage-skill",
     namespace: "atomist",
-    displayName: "NPM License Usage",
+    displayName: "npm License Usage",
     author: "Atomist",
     categories: [Category.Dependencies, Category.DevEx],
     license: "Apache-2.0",
