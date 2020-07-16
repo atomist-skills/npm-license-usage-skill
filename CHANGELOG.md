@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.1...HEAD)
 
+### Changed
+
+-   Update npm to be lowercase. [95b76ea](https://github.com/atomist-skills/npm-license-usage-skill/commit/95b76ea8e52d5fec400f74a31dee39e059d48964)
+
 ## [0.1.1](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.0...0.1.1) - 2020-07-16
 
 ### Changed
