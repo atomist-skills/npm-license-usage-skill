@@ -2,7 +2,7 @@
 
 <!---atomist-skill-description:start--->
 
-Maintain a third-party license usage file for NPM projects
+Maintain a third-party license usage file for npm projects
 
 <!---atomist-skill-description:end--->
 
