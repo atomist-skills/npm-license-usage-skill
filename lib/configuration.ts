@@ -15,9 +15,14 @@
  */
 
 export interface NpmLicenseUsageConfiguration {
-    contact: string;
-    file?: string;
-    footer?: string;
-    push?: "commit_default" | "commit" | "pr" | "pr_default" | "pr_default_commit";
-    labels?: string[];
+	contact: string;
+	file?: string;
+	footer?: string;
+	push?:
+		| "commit_default"
+		| "commit"
+		| "pr"
+		| "pr_default"
+		| "pr_default_commit";
+	labels?: string[];
 }
