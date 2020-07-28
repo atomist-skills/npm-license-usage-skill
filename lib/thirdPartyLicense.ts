@@ -46,9 +46,9 @@ export async function addThirdPartyLicenseFile(
 	const pj = await fs.readJson(project.path("package.json"));
 	const projectName =
 		pj.name ||
-		`@${project.id.owner === "atomist-skills" ? "atomist" : project.id.owner}/${
-			project.id.repo
-		}`;
+		`@${
+			project.id.owner === "atomist-skills" ? "atomist" : project.id.owner
+		}/${project.id.repo}`;
 	const ownModule = `${projectName}@${pj.version || "0.1.0"}`;
 
 	if (!(await fs.pathExists(project.path("node_modules")))) {
@@ -207,10 +207,14 @@ function formatTable(headers: string[], rows: string[][]): string {
 		widths[ix] = _.maxBy([h, ...rows.map(r => r[ix])], "length").length;
 	});
 	lines.push(
-		`|${headers.map((h, ix) => ` ${h.padEnd(widths[ix], " ")} `).join("|")}|`,
+		`|${headers
+			.map((h, ix) => ` ${h.padEnd(widths[ix], " ")} `)
+			.join("|")}|`,
 	);
 	lines.push(
-		`|${headers.map((h, ix) => ` ${"-".padEnd(widths[ix], "-")} `).join("|")}|`,
+		`|${headers
+			.map((h, ix) => ` ${"-".padEnd(widths[ix], "-")} `)
+			.join("|")}|`,
 	);
 	lines.push(
 		...rows.map(
