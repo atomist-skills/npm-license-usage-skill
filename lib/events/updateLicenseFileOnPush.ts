@@ -70,10 +70,9 @@ export const handler: EventHandler<
 	);
 
 	await ctx.audit.log(
-		`Cloned repository ${repo.owner}/${repo.name} at sha ${push.after.sha.slice(
-			0,
-			7,
-		)}`,
+		`Cloned repository ${repo.owner}/${
+			repo.name
+		} at sha ${push.after.sha.slice(0, 7)}`,
 	);
 
 	if (!(await fs.pathExists(project.path("package.json")))) {
