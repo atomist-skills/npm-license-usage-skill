@@ -115,7 +115,7 @@ Creative Commons Zero v1.0 Universal - [https://creativecommons.org/publicdomain
 | Name                | Version  | Publisher           | Repository                                                                                             |
 | ------------------- | -------- | ------------------- | ------------------------------------------------------------------------------------------------------ |
 | `spdx-license-ids`  | `3.0.5`  | Shinnosuke Watanabe | [https://github.com/shinnn/spdx-license-ids](https://github.com/shinnn/spdx-license-ids)               |
-| `spdx-license-list` | `6.2.0`  | Sindre Sorhus       | [https://github.com/sindresorhus/spdx-license-list](https://github.com/sindresorhus/spdx-license-list) |
+| `spdx-license-list` | `6.3.0`  | Sindre Sorhus       | [https://github.com/sindresorhus/spdx-license-list](https://github.com/sindresorhus/spdx-license-list) |
 | `type-fest`         | `0.16.0` | Sindre Sorhus       | [https://github.com/sindresorhus/type-fest](https://github.com/sindresorhus/type-fest)                 |
 
 #### GPL-2.0
