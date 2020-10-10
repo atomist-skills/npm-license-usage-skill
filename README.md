@@ -12,8 +12,8 @@ Maintain a third-party license usage file for npm projects
 
 # What it's useful for
 
-With this skill you can maintain a third-party open-source license usage file for
-your npm-based project.
+With this skill you can maintain a third-party open-source license usage file
+for your npm-based project.
 
 -   Disclose your usage of third-party open-source software in your projects
     consistently across all your repositories
@@ -34,17 +34,17 @@ integration is optional.
 
 1. **Configure a contact email address**
 
-    Specify an email address that should be added to the license usage file
-    in case users want to raise questions.
+    Specify an email address that should be added to the license usage file in
+    case users want to raise questions.
 
     Please note that this email address will be committed into the file and
     therefore might be publicly readable.
 
 1. **Configure the name of the usage file**
 
-    By default, the license usage file is written to `legal/THIRD_PARTY.md`.
-    Use this parameter to configure the location and name of the file according
-    to your standards.
+    By default, the license usage file is written to `legal/THIRD_PARTY.md`. Use
+    this parameter to configure the location and name of the file according to
+    your standards.
 
 1. **Specify content to go into the footer**
 
@@ -57,22 +57,22 @@ integration is optional.
     The following options are available:
 
     - **Raise pull request for default branch; commit to other branches** - with
-      this option, updates for the default branch will be submitted via
-      a pull request; updates on other branches will be committed straight
-      onto the branch
+      this option, updates for the default branch will be submitted via a pull
+      request; updates on other branches will be committed straight onto the
+      branch
     - **Raise pull request for default branch only** - with this option, updates
       on the default branch will be submitted via a pull request; other branches
       will be ignored
-    - **Raise pull request for any branch** - with this option, updates on
-      all branches will be submitted via a pull request
+    - **Raise pull request for any branch** - with this option, updates on all
+      branches will be submitted via a pull request
     - **Commit to default branch only** - with this option, updates on the
       default branch will be committed straight to the branch; other branches
       will be ignored
     - **Commit to any branch** - with this option, updates on all branches will
       be committed straight to the branch
 
-    Pull requests that get raised by this skill will automatically have a reviewer
-    assigned based on the person who pushed code.
+    Pull requests that get raised by this skill will automatically have a
+    reviewer assigned based on the person who pushed code.
 
 1. **Configure pull request labels**
 
@@ -98,15 +98,16 @@ integration is optional.
 
 1. **See how the skill automatically updates the license usage information!**
 
-To create feature requests or bug reports, create an [issue in the repository for this skill](https://github.com/atomist-skills/npm-license-usage-skill/issues).
-See the [code](https://github.com/atomist-skills/npm-license-usage-skill) for the skill.
+To create feature requests or bug reports, create an
+[issue in the repository for this skill](https://github.com/atomist-skills/npm-license-usage-skill/issues).
+See the [code](https://github.com/atomist-skills/npm-license-usage-skill) for
+the skill.
 
 <!---atomist-skill-readme:end--->
 
 ---
 
-Created by [Atomist][atomist].
-Need Help? [Join our Slack workspace][slack].
+Created by [Atomist][atomist]. Need Help? [Join our Slack workspace][slack].
 
 [atomist]: https://atomist.com/ "Atomist - How Teams Deliver Software"
 [slack]: https://join.atomist.com/ "Atomist Community Slack"
