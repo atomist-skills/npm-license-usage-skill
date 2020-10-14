@@ -32,7 +32,7 @@ export const handler: EventHandler<
 > = async ctx => {
 	const push = ctx.data.Push[0];
 	const repo = push.repo;
-	const cfg = ctx.configuration[0].parameters;
+	const cfg = ctx.configuration?.parameters;
 
 	if (
 		repo.defaultBranch !== push.branch &&

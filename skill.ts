@@ -31,10 +31,6 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
 	author: "Atomist",
 	categories: [Category.Dependencies, Category.ProjectManagement],
 	license: "Apache-2.0",
-	homepageUrl: "https://github.com/atomist-seeds/npm-license-usage-skill",
-	repositoryUrl:
-		"https://github.com/atomist-seeds/npm-license-usage-skill.git",
-	iconUrl: "file://docs/images/icon.svg",
 
 	runtime: {
 		memory: 2048,
@@ -85,6 +81,4 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
 		},
 		repos: parameter.repoFilter({ required: false }),
 	},
-
-	subscriptions: ["file://graphql/subscription/*.graphql"],
 });

@@ -42,7 +42,7 @@ export async function addThirdPartyLicenseFile(
 		NpmLicenseUsageConfiguration
 	>,
 ): Promise<void> {
-	const cfg = ctx.configuration?.[0]?.parameters;
+	const cfg = ctx.configuration?.parameters;
 	const pj = await fs.readJson(project.path("package.json"));
 	const projectName =
 		pj.name ||
