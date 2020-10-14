@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.4...HEAD)
 
+### Changed
+
+-   Remove single dispatch. [916c72b](https://github.com/atomist-skills/npm-license-usage-skill/commit/916c72bbce76f3a691176ef1081bf3df3369f7f9)
+
 ## [0.1.4](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.3...0.1.4) - 2020-07-28
 
 ### Changed
