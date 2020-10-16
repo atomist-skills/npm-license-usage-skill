@@ -1,7 +1,7 @@
 {
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.3.0-main.23",
+    "@atomist/skill": "^0.3.1",
     "license-checker": "^25.0.1",
     "spdx-license-list": "^6.3.0"
   },
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "autotest": "supervisor --watch index.ts,lib,test --extensions ts --no-restart-on exit --quiet --exec npm -- test",
-    "build": "run-s compile test lint doc",
+    "build": "run-s clean compile test lint doc",
     "clean": "run-p clean:compile clean:test clean:doc clean:run",
     "clean:compile": "rimraf git-info.json \"*.{d.ts,js}{,.map}\" \"{lib,test}/**/*.{d.ts,js}{,.map}\" lib/typings/types.ts",
     "clean:dist": "run-s clean clean:npm",
@@ -52,7 +52,7 @@
     "lint": "eslint --ext .ts .",
     "lint:fix": "npm run lint -- --fix",
     "start": "functions-framework --target=entryPoint --signature-type=event",
-    "test": "mocha --require espower-typescript/guess \"test/**/*.test.ts\" --reporter min",
+    "test": "mocha --require espower-typescript/guess \"test/**/*.test.ts\"",
     "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\"",
     "typedoc": "npm run doc",
     "skill": "run-s compile test skill:generate skill:bundle skill:package",

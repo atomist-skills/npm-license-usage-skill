@@ -29,7 +29,7 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
 	namespace: "atomist",
 	displayName: "npm License Usage",
 	author: "Atomist",
-	categories: [Category.Dependencies, Category.ProjectManagement],
+	categories: [Category.RepoManagement],
 	license: "Apache-2.0",
 
 	runtime: {
