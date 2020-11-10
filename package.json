@@ -1,7 +1,7 @@
 {
   "main": "node_modules/@atomist/skill/lib/function.js",
   "dependencies": {
-    "@atomist/skill": "^0.4.1",
+    "@atomist/skill": "^0.5.0",
     "license-checker": "^25.0.1",
     "spdx-license-list": "^6.3.0"
   },
