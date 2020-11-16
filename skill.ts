@@ -30,6 +30,8 @@ export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
 	displayName: "npm License Usage",
 	author: "Atomist",
 	categories: [Category.RepoManagement],
+	iconUrl:
+		"https://raw.githubusercontent.com/atomist-skills/npm-license-usage-skill/main/docs/images/icon.svg",
 	license: "Apache-2.0",
 
 	runtime: {
