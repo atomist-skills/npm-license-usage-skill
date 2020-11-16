@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.2.0...HEAD)
 
+### Changed
+
+-   Update skill icon. [54f4fdb](https://github.com/atomist-skills/npm-license-usage-skill/commit/54f4fdb27a645d6acaf28f3221e329eaea2c1a4a)
+
 ## [0.2.0](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.5...0.2.0) - 2020-10-16
 
 ### Changed
