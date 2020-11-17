@@ -23,12 +23,7 @@ for your npm-based project.
 
 Connect and configure this integration:
 
-1. **GitHub**
-1. **Slack or Microsoft Teams**
-
-The **GitHub** integration must be configured in order to use this skill. At
-least one repository must be selected. The **Slack** or **Microsoft Teams**
-integration is optional.
+1. **GitHub** _(required)_
 
 # How to configure
 
