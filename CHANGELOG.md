@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 -   Update skill icon. [54f4fdb](https://github.com/atomist-skills/npm-license-usage-skill/commit/54f4fdb27a645d6acaf28f3221e329eaea2c1a4a)
+-   Use type generation in @atomist/skill. [e00aadc](https://github.com/atomist-skills/npm-license-usage-skill/commit/e00aadc1e94daca112ae442b093e1d982396df00)
 
 ## [0.2.0](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.1.5...0.2.0) - 2020-10-16
 
