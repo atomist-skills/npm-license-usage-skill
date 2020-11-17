@@ -1,108 +1,81 @@
 # `atomist/npm-license-usage-skill`
 
-<!---atomist-skill-description:start--->
-
 Maintain a third-party license usage file for npm projects
 
-<!---atomist-skill-description:end--->
+:sparkles: [_**View this skill in the Atomist Skills Catalog**_][atomist-skill]
+to enable this skill on your repositories. :sparkles:
 
----
+See the [Atomist website][atomist] for general information about Atomist Skills
+and the [Atomist documentation site][atomist-doc] for instructions on how to get
+started using Atomist Skills.
 
-<!---atomist-skill-readme:start--->
+[atomist-skill]:
+    https://go.atomist.com/catalog/skills/atomist/npm-license-usage-skill
+    "Atomist Skills Catalog - Automate All Your Software Tasks"
+[atomist-doc]: https://docs.atomist.com/ "Atomist Documentation"
 
-# What it's useful for
+## Contributing
 
-With this skill you can maintain a third-party open-source license usage file
-for your npm-based project.
+Contributions to this project from community members are encouraged and
+appreciated. Please review the [Contributing Guidelines](CONTRIBUTING.md) for
+more information. Also see the [Development](#development) section in this
+document.
 
--   Disclose your usage of third-party open-source software in your projects
-    consistently across all your repositories
--   Never forget to update legal license files
+## Code of conduct
 
-# Before you get started
+This project is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). You are
+expected to act in accordance with this code by participating. Please report any
+unacceptable behavior to code-of-conduct@atomist.com.
 
-Connect and configure this integration:
+## Connect
 
-1. **GitHub** _(required)_
+Follow [@atomist][atomist-twitter] on Twitter and [The Atomist
+Blog][atomist-blog].
 
-# How to configure
+[atomist-twitter]: https://twitter.com/atomist "Atomist on Twitter"
+[atomist-blog]: https://blog.atomist.com/ "The Atomist Blog"
 
-1. **Configure a contact email address**
+## Support
 
-    Specify an email address that should be added to the license usage file in
-    case users want to raise questions.
+General support questions should be discussed in the `#support` channel in the
+[Atomist community Slack workspace][slack].
 
-    Please note that this email address will be committed into the file and
-    therefore might be publicly readable.
+If you find a problem, please create an [issue](../../issues).
 
-1. **Configure the name of the usage file**
+## Development
 
-    By default, the license usage file is written to `legal/THIRD_PARTY.md`. Use
-    this parameter to configure the location and name of the file according to
-    your standards.
+You will need to install [Node.js][node] to build and test this project.
 
-1. **Specify content to go into the footer**
+[node]: https://nodejs.org/ "Node.js"
 
-    Sometimes you might want to include additional content, like links to legal
-    policies and terms of use, to the license usage file. Specify this content
-    in this parameter and it will be added as the footer of the file.
+### Build and test
 
-1. **Specify how to commit the license file**
+Install dependencies.
 
-    The following options are available:
+```
+$ npm ci
+```
 
-    - **Raise pull request for default branch; commit to other branches** - with
-      this option, updates for the default branch will be submitted via a pull
-      request; updates on other branches will be committed straight onto the
-      branch
-    - **Raise pull request for default branch only** - with this option, updates
-      on the default branch will be submitted via a pull request; other branches
-      will be ignored
-    - **Raise pull request for any branch** - with this option, updates on all
-      branches will be submitted via a pull request
-    - **Commit to default branch only** - with this option, updates on the
-      default branch will be committed straight to the branch; other branches
-      will be ignored
-    - **Commit to any branch** - with this option, updates on all branches will
-      be committed straight to the branch
+Use the `build` package script to compile, test, lint, and build the
+documentation.
 
-    Pull requests that get raised by this skill will automatically have a
-    reviewer assigned based on the person who pushed code.
+```
+$ npm run build
+```
 
-1. **Configure pull request labels**
+### Release
 
-    Add additional labels to pull requests raised by this skill.
+Releases are created by pushing a release [semantic version][semver] tag to the
+repository, Atomist Skills take care of the rest.
 
-    This is useful to influence how and when the PR should be auto-merged by the
-    [Auto-Merge Pull Requests](https://go.atomist.com/catalog/skills/atomist/github-auto-merge-skill)
-    skill.
+To make this skill globally available, set its maturity to "stable" via the set
+maturity drop-down in its Atomist Community Slack channel.
 
-1. **Determine repository scope**
-
-    By default, this skill will be enabled for all repositories in all
-    organizations you have connected.
-
-    To restrict the organizations or specific repositories on which the skill
-    will run, you can explicitly choose organization(s) and repositories.
-
-# How to maintain npm usage information
-
-1. **Set up the skill by at least a contact email address**
-
-1. **Commit and push changes to your package dependencies**
-
-1. **See how the skill automatically updates the license usage information!**
-
-To create feature requests or bug reports, create an
-[issue in the repository for this skill](https://github.com/atomist-skills/npm-license-usage-skill/issues).
-See the [code](https://github.com/atomist-skills/npm-license-usage-skill) for
-the skill.
-
-<!---atomist-skill-readme:end--->
+[semver]: https://semver.org/ "Semantic Version"
 
 ---
 
 Created by [Atomist][atomist]. Need Help? [Join our Slack workspace][slack].
 
-[atomist]: https://atomist.com/ "Atomist - How Teams Deliver Software"
+[atomist]: https://atomist.com/ "Atomist - Automate All the Software Things"
 [slack]: https://join.atomist.com/ "Atomist Community Slack"
