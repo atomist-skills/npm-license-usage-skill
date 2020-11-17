@@ -1,6 +1,6 @@
 # `atomist/npm-license-usage-skill`
 
-Maintain a third-party license usage file for npm projects
+Maintain a third-party license usage file for npm projects.
 
 :sparkles: [_**View this skill in the Atomist Skills Catalog**_][atomist-skill]
 to enable this skill on your repositories. :sparkles:
