@@ -20,6 +20,7 @@ import * as lc from "license-checker";
 import * as _ from "lodash";
 import * as path from "path";
 import * as spdx from "spdx-license-list";
+import * as escape from "markdown-escape";
 import { promisify } from "util";
 import { NpmLicenseUsageConfiguration } from "./configuration";
 import { UpdateLicenseFileOnPushSubscription } from "./typings/types";
@@ -132,14 +133,16 @@ export async function addThirdPartyLicenseFile(
 			return [
 				`\`${name}\``,
 				`\`${version}\``,
-				dep.publisher ? dep.publisher : "",
+				dep.publisher ? escapeMarkdown(dep.publisher) : "",
 				dep.repository ? `[${dep.repository}](${dep.repository})` : "",
 			];
 		});
 		let ld = "";
 
 		if (spdx[k]) {
-			ld = `${spdx[k].name} - [${spdx[k].url}](${spdx[k].url})\n`;
+			ld = `${escapeMarkdown(spdx[k].name)} - [${spdx[k].url}](${
+				spdx[k].url
+			})\n`;
 		}
 
 		details.push(`
@@ -151,9 +154,9 @@ ${ld ? `${ld}\n` : ""}${formatTable(LicenseTableHeader, deps)}`);
 	const lic = spdx[pj.license]
 		? `
 
-\`${projectName}\` is licensed under ${spdx[pj.license].name} - [${
-				spdx[pj.license].url
-		  }](${spdx[pj.license].url}).`
+\`${projectName}\` is licensed under ${escapeMarkdown(
+				spdx[pj.license].name,
+		  )} - [${spdx[pj.license].url}](${spdx[pj.license].url}).`
 		: "";
 	const content = `# \`${projectName}\`${lic}
 
@@ -225,4 +228,8 @@ function formatTable(headers: string[], rows: string[][]): string {
 		),
 	);
 	return lines.join("\n");
+}
+
+function escapeMarkdown(txt: string): string {
+	return escape(txt);
 }
