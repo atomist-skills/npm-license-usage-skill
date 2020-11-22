@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/npm-license-usage-skill/compare/1.0.0...HEAD)
 
+### Fixed
+
+-   Escape markdown syntax characters. [#74](https://github.com/atomist-skills/npm-license-usage-skill/issues/74)
+
 ## [1.0.0](https://github.com/atomist-skills/npm-license-usage-skill/compare/0.2.0...1.0.0) - 2020-11-18
 
 ### Changed
