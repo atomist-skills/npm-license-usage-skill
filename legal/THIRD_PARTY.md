@@ -23,7 +23,7 @@ This page details all runtime dependencies of `@atomist/npm-license-usage-skill`
 | [ISC](#isc)                            | 59    |
 | [MIT AND CC-BY-3.0](#mit-and-cc-by-30) | 1     |
 | [MIT AND Zlib](#mit-and-zlib)          | 1     |
-| [MIT](#mit)                            | 584   |
+| [MIT](#mit)                            | 585   |
 | [Public Domain](#public-domain)        | 1     |
 | [Unlicense](#unlicense)                | 1     |
 
@@ -669,6 +669,7 @@ MIT License - [https://opensource.org/licenses/MIT](https://opensource.org/licen
 | `make-dir`                                           | `3.1.0`        | Sindre Sorhus                  | [https://github.com/sindresorhus/make-dir](https://github.com/sindresorhus/make-dir)                                                                                                                 |
 | `map-cache`                                          | `0.2.2`        | Jon Schlinkert                 | [https://github.com/jonschlinkert/map-cache](https://github.com/jonschlinkert/map-cache)                                                                                                             |
 | `map-obj`                                            | `4.1.0`        | Sindre Sorhus                  | [https://github.com/sindresorhus/map-obj](https://github.com/sindresorhus/map-obj)                                                                                                                   |
+| `markdown-escape`                                    | `1.1.0`        | Kyle E. Mitchell               | [https://github.com/kemitchell/markdown-escape.js](https://github.com/kemitchell/markdown-escape.js)                                                                                                 |
 | `merge2`                                             | `1.3.0`        |                                | [https://github.com/teambition/merge2](https://github.com/teambition/merge2)                                                                                                                         |
 | `micromatch`                                         | `4.0.2`        | Jon Schlinkert                 | [https://github.com/micromatch/micromatch](https://github.com/micromatch/micromatch)                                                                                                                 |
 | `mime-db`                                            | `1.44.0`       |                                | [https://github.com/jshttp/mime-db](https://github.com/jshttp/mime-db)                                                                                                                               |
