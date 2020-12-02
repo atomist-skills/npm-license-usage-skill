@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased](https://github.com/atomist-skills/npm-license-usage-skill/compare/1.0.1...HEAD)
 
+### Changed
+
+-   Improve wording in commit message and PR title. [ab3f102](https://github.com/atomist-skills/npm-license-usage-skill/commit/ab3f102eda4fb15c03437fb1feb73b99d1c4e842)
+
 ## [1.0.1](https://github.com/atomist-skills/npm-license-usage-skill/compare/1.0.0...1.0.1) - 2020-11-22
 
 ### Fixed
