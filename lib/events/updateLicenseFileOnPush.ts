@@ -38,11 +38,7 @@ export const handler: EventHandler<
 		repo.defaultBranch !== push.branch &&
 		(cfg.push === "commit_default" || cfg.push === "pr_default")
 	) {
-		return {
-			code: 0,
-			visibility: "hidden",
-			reason: "Ignoring push to non-default branch",
-		};
+		return status.success("Ignoring push to non-default branch").hidden();
 	}
 
 	if (push.branch.startsWith("atomist/")) {
@@ -76,16 +72,12 @@ export const handler: EventHandler<
 	);
 
 	if (!(await fs.pathExists(project.path("package.json")))) {
-		return {
-			code: 0,
-			visibility: "hidden",
-			reason: "Ignoring push to non npm repository",
-		};
+		return status.success("Ignoring push to non-npm repository").hidden();
 	}
 
 	await addThirdPartyLicenseFile(project, ctx);
 
-	const commitMsg = `npm license usage update\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
+	const commitMsg = `Update npm license usage information\n\n[atomist:generated]\n[atomist-skill:${ctx.skill.namespace}/${ctx.skill.name}]`;
 	const branch = `atomist/npm-license-${push.branch}`;
 
 	return await github.persistChanges(
@@ -103,8 +95,8 @@ export const handler: EventHandler<
 		},
 		{
 			branch,
-			body: "Updated npm license usage file",
-			title: "npm license usage update",
+			body: "This pull request updates the npm license usage information",
+			title: "Update npm license usage information",
 			labels: cfg.labels,
 		},
 		{ message: commitMsg },
