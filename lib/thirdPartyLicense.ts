@@ -18,10 +18,11 @@ import { EventContext, project } from "@atomist/skill";
 import * as fs from "fs-extra";
 import * as lc from "license-checker";
 import * as _ from "lodash";
+import * as escape from "markdown-escape";
 import * as path from "path";
 import * as spdx from "spdx-license-list";
-import * as escape from "markdown-escape";
 import { promisify } from "util";
+
 import { NpmLicenseUsageConfiguration } from "./configuration";
 import { UpdateLicenseFileOnPushSubscription } from "./typings/types";
 

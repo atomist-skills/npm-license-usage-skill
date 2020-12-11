@@ -22,6 +22,7 @@ import {
 	status,
 } from "@atomist/skill";
 import * as fs from "fs-extra";
+
 import { NpmLicenseUsageConfiguration } from "../configuration";
 import { addThirdPartyLicenseFile } from "../thirdPartyLicense";
 import { UpdateLicenseFileOnPushSubscription } from "../typings/types";

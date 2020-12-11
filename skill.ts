@@ -22,6 +22,7 @@ import {
 	resourceProvider,
 	skill,
 } from "@atomist/skill";
+
 import { NpmLicenseUsageConfiguration } from "./lib/configuration";
 
 export const Skill = skill<NpmLicenseUsageConfiguration & { repos: any }>({
