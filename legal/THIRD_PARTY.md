@@ -220,7 +220,7 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 | `hosted-git-info`           | `2.8.8`   | Rebecca Turner     | [https://github.com/npm/hosted-git-info](https://github.com/npm/hosted-git-info)                             |
 | `inflight`                  | `1.0.6`   | Isaac Z. Schlueter | [https://github.com/npm/inflight](https://github.com/npm/inflight)                                           |
 | `inherits`                  | `2.0.4`   |                    | [https://github.com/isaacs/inherits](https://github.com/isaacs/inherits)                                     |
-| `ini`                       | `1.3.5`   | Isaac Z. Schlueter | [https://github.com/isaacs/ini](https://github.com/isaacs/ini)                                               |
+| `ini`                       | `1.3.8`   | Isaac Z. Schlueter | [https://github.com/isaacs/ini](https://github.com/isaacs/ini)                                               |
 | `isexe`                     | `2.0.0`   | Isaac Z. Schlueter | [https://github.com/isaacs/isexe](https://github.com/isaacs/isexe)                                           |
 | `json-stringify-safe`       | `5.0.1`   | Isaac Z. Schlueter | [https://github.com/isaacs/json-stringify-safe](https://github.com/isaacs/json-stringify-safe)               |
 | `log-driver`                | `1.2.7`   | Gregg Caines       | [https://github.com/cainus/logdriver](https://github.com/cainus/logdriver)                                   |
