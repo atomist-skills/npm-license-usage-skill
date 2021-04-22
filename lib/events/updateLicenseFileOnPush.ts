@@ -17,6 +17,7 @@
 import {
 	EventHandler,
 	github,
+	log,
 	repository,
 	secret,
 	status,
@@ -46,9 +47,7 @@ export const handler: EventHandler<
 		return status.failure(`Ignore generated branch`).hidden();
 	}
 
-	await ctx.audit.log(
-		`Starting npm license usage update on ${repo.owner}/${repo.name}`,
-	);
+	log.info(`Starting npm license usage update on ${repo.owner}/${repo.name}`);
 
 	const credential = await ctx.credential.resolve(
 		secret.gitHubAppToken({
@@ -66,7 +65,7 @@ export const handler: EventHandler<
 		}),
 	);
 
-	await ctx.audit.log(
+	log.info(
 		`Cloned repository ${repo.owner}/${
 			repo.name
 		} at sha ${push.after.sha.slice(0, 7)}`,
