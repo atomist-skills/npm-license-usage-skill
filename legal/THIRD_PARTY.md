@@ -194,7 +194,7 @@ ISC License - [https://www.isc.org/downloads/software-support-policy/isc-license
 | `glob-parent`               | `5.1.2`   | Gulp Team          | [https://github.com/gulpjs/glob-parent](https://github.com/gulpjs/glob-parent)                               |
 | `glob`                      | `7.1.6`   | Isaac Z. Schlueter | [https://github.com/isaacs/node-glob](https://github.com/isaacs/node-glob)                                   |
 | `graceful-fs`               | `4.2.4`   |                    | [https://github.com/isaacs/node-graceful-fs](https://github.com/isaacs/node-graceful-fs)                     |
-| `hosted-git-info`           | `2.8.8`   | Rebecca Turner     | [https://github.com/npm/hosted-git-info](https://github.com/npm/hosted-git-info)                             |
+| `hosted-git-info`           | `2.8.9`   | Rebecca Turner     | [https://github.com/npm/hosted-git-info](https://github.com/npm/hosted-git-info)                             |
 | `inflight`                  | `1.0.6`   | Isaac Z. Schlueter | [https://github.com/npm/inflight](https://github.com/npm/inflight)                                           |
 | `inherits`                  | `2.0.4`   |                    | [https://github.com/isaacs/inherits](https://github.com/isaacs/inherits)                                     |
 | `ini`                       | `1.3.8`   | Isaac Z. Schlueter | [https://github.com/isaacs/ini](https://github.com/isaacs/ini)                                               |
