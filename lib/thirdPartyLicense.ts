@@ -55,9 +55,9 @@ export async function addThirdPartyLicenseFile(
 
 	if (!(await fs.pathExists(project.path("node_modules")))) {
 		if (await fs.pathExists(project.path("package-lock.json"))) {
-			await project.exec("npm", ["ci"]);
+			await project.exec("npm", ["ci", "--ignore-scripts"]);
 		} else {
-			await project.exec("npm", ["install"]);
+			await project.exec("npm", ["install", "--ignore-scripts"]);
 		}
 	}
 
